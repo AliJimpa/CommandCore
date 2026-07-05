@@ -1,12 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "System/TriggerCommand.h"
+#include "System/Command.h"
 #include "Command_PrintMessage.generated.h"
 
 /** Prints a debug message to screen and/or log. Handy for prototyping trigger logic. */
 UCLASS(meta = (DisplayName = "Print Message"))
-class COMMANDCORE_API UCommand_PrintMessage : public UTriggerCommand
+class COMMANDCORE_API UCommand_PrintMessage : public UCommand
 {
 	GENERATED_BODY()
 

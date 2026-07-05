@@ -12,6 +12,6 @@ void UCommand_PrintMessage::Execute_Implementation(AActor* TriggerActor, AActor*
 
 	if (bPrintToLog)
 	{
-		UE_LOG(LogTemp, Log, TEXT("[TriggerCommand] %s"), *Full);
+		UE_LOG(LogTemp, Log, TEXT("[Command] %s"), *Full);
 	}
 }

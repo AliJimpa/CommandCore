@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "System/TriggerCommand.h"
+#include "System/Command.h"
 #include "Command_OpenDoor.generated.h"
 
 /**
@@ -13,7 +13,7 @@
  * example of a command that performs a timed action rather than an instant one.
  */
 UCLASS(meta = (DisplayName = "Open Door"))
-class COMMANDCORE_API UCommand_OpenDoor : public UTriggerCommand
+class COMMANDCORE_API UCommand_OpenDoor : public UCommand
 {
 	GENERATED_BODY()
 

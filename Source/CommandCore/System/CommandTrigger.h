@@ -5,12 +5,12 @@
 #include "CommandTrigger.generated.h"
 
 class UBoxComponent;
-class UTriggerCommand;
+class UCommand;
 
 /**
  * Trigger volume - the "Invoker" in Command-pattern terms.
  *
- * Holds two ordered lists of UTriggerCommand objects: one run on BeginOverlap,
+ * Holds two ordered lists of UCommand objects: one run on BeginOverlap,
  * one run on EndOverlap. The volume itself knows nothing about *what* the
  * commands do - it just calls CanExecute()/Execute() on each one in order.
  * That's what makes it easy to add new predefined commands later without
@@ -37,11 +37,11 @@ protected:
 
 	/** Commands run, in order, when something begins overlapping the volume. */
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Trigger|Commands")
-	TArray<TObjectPtr<UTriggerCommand>> OnBeginOverlapCommands;
+	TArray<TObjectPtr<UCommand>> OnBeginOverlapCommands;
 
 	/** Commands run, in order, when something stops overlapping the volume. */
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Trigger|Commands")
-	TArray<TObjectPtr<UTriggerCommand>> OnEndOverlapCommands;
+	TArray<TObjectPtr<UCommand>> OnEndOverlapCommands;
 
 	/** If set, only actors of one of these classes will fire the trigger. Empty = anyone. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Filter")
@@ -66,5 +66,5 @@ protected:
 	void HandleEndOverlap(UPrimitiveComponent *OverlappedComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex);
 
 	bool PassesFilter(AActor *OtherActor) const;
-	void RunCommands(const TArray<TObjectPtr<UTriggerCommand>> &Commands, AActor *OtherActor);
+	void RunCommands(const TArray<TObjectPtr<UCommand>> &Commands, AActor *OtherActor);
 };

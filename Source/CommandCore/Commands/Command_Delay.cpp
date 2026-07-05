@@ -15,7 +15,7 @@ void UCommand_Delay::Execute_Implementation(AActor* TriggerActor, AActor* OtherA
 		return;
 	}
 
-	TWeakObjectPtr<UTriggerCommand> WeakInner(InnerCommand);
+	TWeakObjectPtr<UCommand> WeakInner(InnerCommand);
 	TWeakObjectPtr<AActor> WeakTrigger(TriggerActor);
 	TWeakObjectPtr<AActor> WeakOther(OtherActor);
 
@@ -23,7 +23,7 @@ void UCommand_Delay::Execute_Implementation(AActor* TriggerActor, AActor* OtherA
 	FTimerDelegate TimerDelegate;
 	TimerDelegate.BindLambda([WeakInner, WeakTrigger, WeakOther]()
 	{
-		UTriggerCommand* Inner = WeakInner.Get();
+		UCommand* Inner = WeakInner.Get();
 		if (!Inner)
 		{
 			return;

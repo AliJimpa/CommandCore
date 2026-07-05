@@ -1,6 +1,6 @@
 #include "CommandTrigger.h"
 #include "Components/BoxComponent.h"
-#include "TriggerCommand.h"
+#include "Command.h"
 
 // ACommandTrigger::ACommandTrigger()
 // {
@@ -54,9 +54,9 @@ bool ACommandTrigger::PassesFilter(AActor *OtherActor) const
 	return true;
 }
 
-void ACommandTrigger::RunCommands(const TArray<TObjectPtr<UTriggerCommand>> &Commands, AActor *OtherActor)
+void ACommandTrigger::RunCommands(const TArray<TObjectPtr<UCommand>> &Commands, AActor *OtherActor)
 {
-	for (UTriggerCommand *Command : Commands)
+	for (UCommand *Command : Commands)
 	{
 		if (Command && Command->CanExecute(this, OtherActor))
 		{

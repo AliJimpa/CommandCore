@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "TriggerCommand.generated.h"
+#include "Command.generated.h"
 
 /**
  * Abstract base "Command" object for the Trigger Command System.
@@ -19,7 +19,7 @@
  * class based on any UCommand_* class).
  */
 UCLASS(Abstract, EditInlineNew, DefaultToInstanced, BlueprintType, Blueprintable, CollapseCategories)
-class COMMANDCORE_API UTriggerCommand : public UObject
+class COMMANDCORE_API UCommand : public UObject
 {
 	GENERATED_BODY()
 

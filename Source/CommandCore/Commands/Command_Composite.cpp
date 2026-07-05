@@ -2,7 +2,7 @@
 
 void UCommand_Composite::Execute_Implementation(AActor* TriggerActor, AActor* OtherActor)
 {
-	for (UTriggerCommand* Command : Commands)
+	for (UCommand* Command : Commands)
 	{
 		if (Command && Command->CanExecute(TriggerActor, OtherActor))
 		{

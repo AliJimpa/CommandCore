@@ -1,14 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "System/TriggerCommand.h"
+#include "System/Command.h"
 #include "Command_ApplyDamage.generated.h"
 
 class UDamageType;
 
 /** Applies damage to whichever actor overlapped the trigger - e.g. a lava, spikes, or fire volume. */
 UCLASS(meta = (DisplayName = "Apply Damage To Other Actor"))
-class COMMANDCORE_API UCommand_ApplyDamage : public UTriggerCommand
+class COMMANDCORE_API UCommand_ApplyDamage : public UCommand
 {
 	GENERATED_BODY()
 

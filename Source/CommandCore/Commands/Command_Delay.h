@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "System/TriggerCommand.h"
+#include "System/Command.h"
 #include "Command_Delay.generated.h"
 
 /**
@@ -10,7 +10,7 @@
  * without writing a new command class for every combination.
  */
 UCLASS(meta = (DisplayName = "Delay"))
-class COMMANDCORE_API UCommand_Delay : public UTriggerCommand
+class COMMANDCORE_API UCommand_Delay : public UCommand
 {
 	GENERATED_BODY()
 
@@ -21,5 +21,5 @@ public:
 	float DelaySeconds = 1.f;
 
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadWrite, Category = "Command")
-	TObjectPtr<UTriggerCommand> InnerCommand;
+	TObjectPtr<UCommand> InnerCommand;
 };

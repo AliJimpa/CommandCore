@@ -1,14 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "System/TriggerCommand.h"
+#include "System/Command.h"
 #include "Command_PlaySound.generated.h"
 
 class USoundBase;
 
 /** Plays a sound - either at the trigger's location in 3D, or as a fire-and-forget 2D sound. */
 UCLASS(meta = (DisplayName = "Play Sound"))
-class COMMANDCORE_API UCommand_PlaySound : public UTriggerCommand
+class COMMANDCORE_API UCommand_PlaySound : public UCommand
 {
 	GENERATED_BODY()
 
