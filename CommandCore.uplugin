@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "CommandCore",
+	"Description": "Is an Unreal Engine plugin that brings the Command Design Pattern into your project, giving you a clean, reusable, and designer-friendly way to trigger gameplay logic from anywhere in your game.",
+	"Category": "GamePlay",
+	"CreatedBy": "Alijimpa",
+	"CreatedByURL": "https://alibadpa.weebly.com/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "alibadpa007@gmail.com",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "CommandCore",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
