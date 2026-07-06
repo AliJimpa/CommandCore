@@ -6,6 +6,9 @@
 
 class UCommand;
 
+/** Broadcast whenever ExecuteCommands() is called on this component. */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCommandsExecuted, AActor *, InstigatorActor);
+
 /**
  * Holds an ordered list of Commands and executes them in sequence.
  *
@@ -14,12 +17,16 @@ class UCommand;
  * inline), then call ExecuteCommands() from anywhere - Blueprint, C++, input
  * events, triggers, etc. - to run the whole sequence.
  */
-UCLASS(NotBlueprintable, BlueprintType, ClassGroup = (CommandCore), meta = (BlueprintSpawnableComponent, DisplayName = "Command Executor", Tooltip = "Holds an order list of commands and executes them in order."))
+UCLASS(NotBlueprintable, BlueprintType, ClassGroup = (CommandCore), meta = (BlueprintSpawnableComponent, DisplayName = "Command Executor"))
 class COMMANDCORE_API UCommandExecutorComponent : public UActorComponent
 {
     GENERATED_BODY()
 public:
     UCommandExecutorComponent();
+
+public:
+    UPROPERTY(BlueprintAssignable, Category = "Command|Events")
+    FOnCommandsExecuted OnCommandsExecuted;
 
 protected:
     /** Ordered list of commands to run when ExecuteCommands() is called. */

@@ -1,6 +1,16 @@
 #include "Command.h"
 #include "Engine/CommandDebug.h"
 
+void UCommand::Construction(AActor *OwnerActor)
+{
+	K2_OnConstruction(OwnerActor);
+}
+
+void UCommand::K2_OnConstruction_Implementation(AActor *OwnerActor)
+{
+	
+}
+
 void UCommand::Execute(AActor *OwnerActor, AActor *InstigatorActor)
 {
 	if (K2_CanExecute(OwnerActor, InstigatorActor))

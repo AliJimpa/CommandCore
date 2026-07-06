@@ -24,6 +24,8 @@ class COMMANDCORE_API UCommand : public UObject
 	GENERATED_BODY()
 
 public:
+	/** Called by the owning actor/component's OnConstruction to forward to this command. */
+	void Construction(AActor *OwnerActor);
 	/**
 	 * Executes this command's logic.
 	 *
@@ -55,4 +57,8 @@ protected:
 	UFUNCTION(BlueprintPure, BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "CanExecute", ToolTip = "Called befor Execute event called. Return false to skip this command.", AllowPrivateAccess = "true"))
 	bool K2_CanExecute(AActor *OwnerActor, AActor *InstigatorActor) const;
 	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const;
+	/** Called in the editor whenever the owning actor's OnConstruction runs */
+	UFUNCTION(BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "On Construction"))
+	void K2_OnConstruction(AActor *OwnerActor);
+	virtual void K2_OnConstruction_Implementation(AActor *OwnerActor);
 };
