@@ -25,12 +25,12 @@ public:
     UCommandExecutorComponent();
 
 public:
-    UPROPERTY(BlueprintAssignable, Category = "Command|Events")
+    UPROPERTY(BlueprintAssignable, Category = "CommandExecutor|Events")
     FOnCommandsExecuted OnCommandsExecuted;
 
 protected:
     /** Ordered list of commands to run when ExecuteCommands() is called. */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Instanced, Category = "Command")
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Instanced, Category = "CommandExecutor")
     TArray<TObjectPtr<UCommand>> Commands;
 
 public:
@@ -45,4 +45,10 @@ public:
      */
     UFUNCTION(BlueprintCallable, Category = "CommandExecutor", meta = (ToolTip = "Executes all commands in this component, in order, passing this component's owner as OwnerActor and the given actor as InstigatorActor."))
     void ExecuteCommands(AActor *InstigatorActor);
+
+private:
+#if WITH_EDITOR
+    UFUNCTION(CallInEditor, Category = "CommandExecutor", meta = (DisplayName = "Construction"))
+    void Construction();
+#endif
 };

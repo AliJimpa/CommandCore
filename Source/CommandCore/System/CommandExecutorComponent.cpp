@@ -25,3 +25,17 @@ void UCommandExecutorComponent::ExecuteCommands(AActor *InstigatorActor)
 
 	OnCommandsExecuted.Broadcast(InstigatorActor);
 }
+
+#if WITH_EDITOR
+void UCommandExecutorComponent::Construction()
+{
+	AActor *OwnerActor = GetOwner();
+	for (UCommand *Command : Commands)
+	{
+		if (Command)
+		{
+			Command->Construction(OwnerActor);
+		}
+	}
+}
+#endif
