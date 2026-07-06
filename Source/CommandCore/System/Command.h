@@ -4,7 +4,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Command.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class ECommandTargetActor : uint8
 {
 	OwnerActor UMETA(DisplayName = "Owner Actor"),
@@ -72,6 +72,6 @@ protected:
 	void K2_OnConstruction(AActor *OwnerActor);
 	virtual void K2_OnConstruction_Implementation(AActor *OwnerActor);
 	UFUNCTION(BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "GetOtherActor"))
-	void K2_GetOtherActor();
-	virtual AActor *K2_GetOtherActor_Implementation() { return nullptr; }
+	AActor *K2_GetOtherActor() const;
+	virtual AActor *K2_GetOtherActor_Implementation() const { return nullptr; }
 };

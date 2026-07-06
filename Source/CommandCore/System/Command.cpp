@@ -36,7 +36,7 @@ bool UCommand::K2_CanExecute_Implementation(AActor *OwnerActor, AActor *Instigat
 
 AActor *UCommand::ResolveTargetActor(AActor *OwnerActor, AActor *InstigatorActor, const ECommandTargetActor &Mode) const
 {
-	switch (TargetActor)
+	switch (Mode)
 	{
 	case ECommandTargetActor::OwnerActor:
 		return OwnerActor;
