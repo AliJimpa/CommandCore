@@ -4,6 +4,7 @@
 ACommandTriggerBox::ACommandTriggerBox()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	RequiredTags.Add(FName("Player"));
 }
 
 void ACommandTriggerBox::BeginPlay()
@@ -50,21 +51,23 @@ bool ACommandTriggerBox::PassesFilter(AActor *OtherActor) const
 		return false;
 	}
 
-	// Blacklist always wins, checked first.
-	for (const TSoftObjectPtr<AActor> &ExcludeActor : ExcludeActors)
+	if (ExcludeActorClasses.Num() > 0)
 	{
-		if (ExcludeActor.Get() == OtherActor)
+		for (const TSubclassOf<AActor> &ExcludeClass : ExcludeActorClasses)
 		{
-			return false;
+			if (ExcludeClass && OtherActor->IsA(ExcludeClass))
+			{
+				return false;
+			}
 		}
 	}
 
-	if (IncludeActors.Num() > 0)
+	if (IncludeActorClasses.Num() > 0)
 	{
 		bool bFoundInInclude = false;
-		for (const TSoftObjectPtr<AActor> &IncludeActor : IncludeActors)
+		for (const TSubclassOf<AActor> &IncludeClass : IncludeActorClasses)
 		{
-			if (IncludeActor.Get() == OtherActor)
+			if (IncludeClass && OtherActor->IsA(IncludeClass))
 			{
 				bFoundInInclude = true;
 				break;

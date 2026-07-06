@@ -49,13 +49,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Trigger|Filter")
 	TArray<FName> RequiredTags;
 
-	/** Whitelist: if non-empty, ONLY these actors are allowed to trigger commands. */
 	UPROPERTY(EditAnywhere, Category = "Trigger|Filter")
-	TArray<TSoftObjectPtr<AActor>> IncludeActors;
+	TArray<TSubclassOf<AActor>> IncludeActorClasses;
 
-	/** Blacklist: these actors are always rejected, even if they pass other filters. */
 	UPROPERTY(EditAnywhere, Category = "Trigger|Filter")
-	TArray<TSoftObjectPtr<AActor>> ExcludeActors;
+	TArray<TSubclassOf<AActor>> ExcludeActorClasses;
 
 	/** If true, the Begin-overlap commands only ever fire once. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Settings")
