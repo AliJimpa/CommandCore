@@ -56,10 +56,10 @@ protected:
 	TArray<TSubclassOf<AActor>> ExcludeActorClasses;
 
 	/** If true, the Begin-overlap commands only ever fire once. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Settings", meta = (InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Settings")
 	bool bTriggerOnce = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Settings", meta = (EditCondition = "bTriggerOnce"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger|Settings", meta = (EditCondition = "bTriggerOnce", EditConditionHides))
 	bool bAutoDestroy = false;
 
 	/** Set true after the trigger has fired once, when bTriggerOnce is set. */
