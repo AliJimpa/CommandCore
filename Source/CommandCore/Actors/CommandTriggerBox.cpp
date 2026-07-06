@@ -42,6 +42,11 @@ void ACommandTriggerBox::RunCommands(const TArray<TObjectPtr<UCommand>> &Command
 			Command->Execute(this, OtherActor);
 		}
 	}
+
+	if(bTriggerOnce && bAutoDestroy)
+	{
+		Destroy();
+	}
 }
 
 bool ACommandTriggerBox::PassesFilter(AActor *OtherActor) const
