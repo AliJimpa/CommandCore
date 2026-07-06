@@ -18,8 +18,7 @@ void UCommand::Execute(AActor *OwnerActor, AActor *InstigatorActor)
 	}
 	else
 	{
-		if (bPrintLog)
-			LOG_WARNING("[%s]: CanExecute retrun false, Execution skiped.", *GetName());
+		Print(TEXT("CanExecute retrun false, Execution skiped."), false);
 	}
 }
 
@@ -44,19 +43,30 @@ AActor *UCommand::ResolveTargetActor(AActor *OwnerActor, AActor *InstigatorActor
 		return InstigatorActor;
 	case ECommandTargetActor::OtherActor:
 		return K2_GetOtherActor();
-	default:
-		LOG_WARNING("Unhandle");
-		return nullptr;
 	}
+	if (bPrintLog)
+		LOG_ERROR("Unhandle TargetActor State for Resolving.");
+	return nullptr;
 }
 
 void UCommand::Print(const FString &Message, bool IsError)
 {
-	if (GEngine && bPrintLog)
+	if (bPrintLog)
 	{
 		const FString MessageTEXT = FString::Printf(TEXT("[%s]: %s"), *GetName(), *Message);
-		const FColor MessageColor = IsError ? FColor::Red : FColor::Yellow;
-		const float MessageTime = IsError ? 15.0f : 8.0f;
-		GEngine->AddOnScreenDebugMessage(-1, MessageTime, MessageColor, MessageTEXT);
+		if (GEngine)
+		{
+			const FColor MessageColor = IsError ? FColor::Red : FColor::Yellow;
+			const float MessageTime = IsError ? 15.0f : 8.0f;
+			GEngine->AddOnScreenDebugMessage(-1, MessageTime, MessageColor, MessageTEXT);
+		}
+		if (IsError)
+		{
+			LOG_ERROR("%s", *MessageTEXT);
+		}
+		else
+		{
+			LOG_WARNING("%s", *MessageTEXT);
+		}
 	}
 }
