@@ -1,11 +1,37 @@
 #include "Command.h"
+#include "Engine/CommandDebug.h"
 
-void UCommand::Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor)
+void UCommand::Execute(AActor *OwnerActor, AActor *InstigatorActor)
 {
-	// Base implementation intentionally does nothing - concrete commands override this.
+	if (K2_CanExecute(OwnerActor, InstigatorActor))
+	{
+		K2_Execute(OwnerActor, InstigatorActor);
+	}
+	else
+	{
+		if (bPrintLog)
+			LOG_WARNING("[%s]: CanExecute retrun false, Execution skiped.", *GetName());
+	}
 }
 
-bool UCommand::CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const
+void UCommand::K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor)
 {
-	return true;
+	if (bPrintLog)
+		LOG("[%s]: Executed.", *GetName());
+}
+
+bool UCommand::K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const
+{
+	return OwnerActor != nullptr && InstigatorActor != nullptr;
+}
+
+void UCommand::Print(const FString &Message, bool IsError)
+{
+	if (GEngine && bPrintLog)
+	{
+		const FString MessageTEXT = FString::Printf(TEXT("[%s]: %s"), *GetName(), *Message);
+		const FColor MessageColor = IsError ? FColor::Red : FColor::Yellow;
+		const float MessageTime = IsError ? 15.0f : 8.0f;
+		GEngine->AddOnScreenDebugMessage(-1, MessageTime, MessageColor, MessageTEXT);
+	}
 }

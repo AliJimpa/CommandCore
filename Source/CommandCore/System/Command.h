@@ -38,13 +38,21 @@ public:
 	 *                          (e.g. the actor that overlapped a trigger box or
 	 *                          interacted with the owner).
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "CommandCore|Command", meta = (ToolTip = "Executes this command. OwnerActor is the actor that holds this command, InstigatorActor is the actor that triggered its execution."))
 	void Execute(AActor *OwnerActor, AActor *InstigatorActor);
-	virtual void Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor);
-	
 
+private:
+	UPROPERTY(EditAnywhere, AdvancedDisplay, Category = "Command")
+	bool bPrintLog = false;
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Command", meta = (ToolTip = "This function will add a debug message to the onscreen message list.", AllowPrivateAccess = "true"))
+	void Print(const FString &Message, bool IsError);
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "Execute", ToolTip = "Executes this command. OwnerActor is the actor that holds this command, InstigatorActor is the actor that triggered its execution.", OwnerActorToolTip = "The actor that owns this command", InstigatorActorToolTip = "The actor that triggered this command's execution", AllowPrivateAccess = "true"))
+	void K2_Execute(AActor *OwnerActor, AActor *InstigatorActor);
+	virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor);
 	/** Optional guard, checked before Execute is called. Return false to skip this command. */
-	UFUNCTION(BlueprintNativeEvent, Category = "Trigger Command")
-	bool CanExecute(AActor *OwnerActor, AActor *InstigatorActor) const;
-	virtual bool CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const;
+	UFUNCTION(BlueprintPure, BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "CanExecute", ToolTip = "Called befor Execute event called. Return false to skip this command.", AllowPrivateAccess = "true"))
+	bool K2_CanExecute(AActor *OwnerActor, AActor *InstigatorActor) const;
+	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const;
 };
