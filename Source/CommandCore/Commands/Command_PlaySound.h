@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "System/Command.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/CommandDebug.h"
 #include "Command_PlaySound.generated.h"
 
 class USoundBase;
@@ -13,14 +14,6 @@ enum class ESoundPlayMode : uint8
 {
 	Sound2D UMETA(DisplayName = "2D Sound"),
 	AtLocation UMETA(DisplayName = "At Location (3D)")
-};
-
-UENUM(BlueprintType)
-enum class ESoundLocationSource : uint8
-{
-	OwnerActor UMETA(DisplayName = "Owner Actor"),
-	InstigatorActor UMETA(DisplayName = "Instigator Actor"),
-	CustomLocation UMETA(DisplayName = "Custom Location")
 };
 
 /**
@@ -45,14 +38,12 @@ protected:
 	ESoundPlayMode PlayMode = ESoundPlayMode::Sound2D;
 
 	/** Stage 2 (only for AtLocation): where the 3D location comes from. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound",
-			  meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation", EditConditionHides))
-	ESoundLocationSource LocationSource = ESoundLocationSource::OwnerActor;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation", EditConditionHides))
+	ECommandTargetActor LocationSource = ECommandTargetActor::OwnerActor;
 
 	/** Custom world-space location, editable via the 3D gizmo in the level viewport. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound",
-			  meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ESoundLocationSource::CustomLocation", EditConditionHides, MakeEditWidget = "true"))
-	FVector CustomLocation = FVector::ZeroVector;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ESoundLocationSource::CustomLocation", EditConditionHides, MakeEditWidget = "true"))
+	TObjectPtr<AActor> CustomLocation;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (ClampMin = "0.0"))
 	float VolumeMultiplier = 1.f;
@@ -74,38 +65,9 @@ protected:
 	TObjectPtr<UAudioComponent> SpawnedAudioComponent;
 
 private:
-	/** Resolves the FVector location based on LocationSource. */
-	FVector ResolveLocation(AActor *OwnerActor, AActor *InstigatorActor) const
+	virtual AActor *K2_GetOtherActor_Implementation() const override
 	{
-		switch (LocationSource)
-		{
-		case ESoundLocationSource::OwnerActor:
-			return OwnerActor ? OwnerActor->GetActorLocation() : FVector::ZeroVector;
-
-		case ESoundLocationSource::InstigatorActor:
-			return InstigatorActor ? InstigatorActor->GetActorLocation() : FVector::ZeroVector;
-
-		case ESoundLocationSource::CustomLocation:
-			return CustomLocation;
-
-		default:
-			return FVector::ZeroVector;
-		}
-	}
-	/** Resolves the AActor to attach to (only relevant when bAttachToActor is true). */
-	AActor *ResolveAttachActor(AActor *OwnerActor, AActor *InstigatorActor) const
-	{
-		switch (LocationSource)
-		{
-		case ESoundLocationSource::OwnerActor:
-			return OwnerActor;
-
-		case ESoundLocationSource::InstigatorActor:
-			return InstigatorActor;
-
-		default:
-			return nullptr;
-		}
+		return CustomLocation;
 	}
 
 protected:
@@ -130,15 +92,20 @@ protected:
 		}
 		else // AtLocation
 		{
-			const FVector Location = ResolveLocation(OwnerActor, InstigatorActor);
+			AActor *TargetActor = ResolveTargetActor(OwnerActor, InstigatorActor, LocationSource);
+			if (TargetActor == nullptr)
+			{
+				Print("TargetActor is not valid!", true);
+				return;
+			}
+
+			const FVector Location = TargetActor->GetActorLocation();
 
 			if (bUseAudioComponent)
 			{
-				AActor *AttachActor = bAttachToActor ? ResolveAttachActor(OwnerActor, InstigatorActor) : nullptr;
-
-				if (AttachActor)
+				if (bAttachToActor)
 				{
-					if (USceneComponent *RootComp = AttachActor->GetRootComponent())
+					if (USceneComponent *RootComp = TargetActor->GetRootComponent())
 					{
 						SpawnedAudioComponent = UGameplayStatics::SpawnSoundAttached(
 							Sound, RootComp, NAME_None, FVector::ZeroVector, EAttachLocation::KeepRelativeOffset,
@@ -157,7 +124,7 @@ protected:
 			}
 		}
 
-		Print(FString::Printf(TEXT("Played sound %s (%s)."), *Sound->GetName(), PlayMode == ESoundPlayMode::Sound2D ? TEXT("2D") : TEXT("At Location")), false);
+		LOG("Played sound %s (%s).", *Sound->GetName(), PlayMode == ESoundPlayMode::Sound2D ? TEXT("2D") : TEXT("At Location"));
 		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}
 };

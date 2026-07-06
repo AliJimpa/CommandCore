@@ -56,5 +56,6 @@ protected:
 									 Inner->Execute(OwnerActor, OtherActorPtr); });
 
 		World->GetTimerManager().SetTimer(TimerHandle, TimerDelegate, FMath::Max(DelaySeconds, 0.f), false);
+		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}
 };

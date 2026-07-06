@@ -50,7 +50,7 @@ protected:
         UInterpToMovementComponent *InterpComp = Cast<UInterpToMovementComponent>(MovementComp);
         if (!InterpComp)
         {
-            Print(TEXT("MovementComp is not a UInterpToMovementComponent."), true);
+            Print("MovementComp is not a UInterpToMovementComponent.", true);
             return;
         }
 
@@ -63,10 +63,10 @@ protected:
 
     virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
     {
-        AActor *Target = ResolveTargetActor(OwnerActor, InstigatorActor);
+        AActor *Target = GetTargetActor(OwnerActor, InstigatorActor);
         if (!Target)
         {
-            Print(TEXT("Target actor is invalid."), true);
+            Print("Target actor is invalid.", true);
             return;
         }
 

@@ -16,7 +16,6 @@ class COMMANDCORE_API UCommand_ApplyDamage : public UCommand
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Damage", meta = (ClampMin = "0.0", AllowPrivateAccess = "true"))
 	float DamageAmount = 10.f;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Damage", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UDamageType> DamageType;
 
@@ -29,7 +28,6 @@ protected:
 			EventInstigator = OwnerPawn->GetController();
 		}
 		UGameplayStatics::ApplyDamage(InstigatorActor, DamageAmount, EventInstigator, OwnerActor, DamageType);
-
 		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}
 };

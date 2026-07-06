@@ -33,17 +33,17 @@ protected:
 protected:
     virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
     {
-        AActor *Target = ResolveTargetActor(OwnerActor, InstigatorActor);
+        AActor *Target = GetTargetActor(OwnerActor, InstigatorActor);
         if (!Target)
         {
-            Print(TEXT("Target actor is invalid."), true);
+            Print("Target actor is invalid.", true);
             return;
         }
 
         URotatingMovementComponent *RotatingComp = Target->FindComponentByClass<URotatingMovementComponent>();
         if (!RotatingComp)
         {
-            Print(TEXT("MovementComp is not a URotatingMovementComponent."), true);
+            Print("MovementComp is not a URotatingMovementComponent.", true);
             return;
         }
 

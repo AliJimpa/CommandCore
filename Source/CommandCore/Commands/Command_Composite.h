@@ -23,6 +23,10 @@ protected:
 			{
 				Command->Execute(OwnerActor, InstigatorActor);
 			}
+			else
+			{
+				Print("There is null command in Commands list", false);
+			}
 		}
 		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}

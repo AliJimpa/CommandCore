@@ -27,6 +27,10 @@ protected:
 	bool bPrintToLog = true;
 
 public:
+	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const override
+	{
+		return OwnerActor != nullptr;
+	}
 	virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
 	{
 		const FString Full = FString::Printf(TEXT("%s (Owner: %s)"), *Message, OwnerActor ? *OwnerActor->GetName() : TEXT("None"));

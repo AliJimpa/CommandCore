@@ -85,7 +85,7 @@ protected:
 
 		if (Targets.Num() == 0)
 		{
-			Print(TEXT("No valid target actors resolved."), false);
+			Print("No valid target actors resolved.", false);
 			return;
 		}
 
