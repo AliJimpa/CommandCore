@@ -5,14 +5,25 @@
 #include "Command_Composite.generated.h"
 
 /** Runs a list of other commands, in order. Lets you group several actions behind one array entry. */
-UCLASS(meta = (DisplayName = "Composite (Run Multiple Commands)"))
+UCLASS(meta = (DisplayName = "Composite"))
 class COMMANDCORE_API UCommand_Composite : public UCommand
 {
 	GENERATED_BODY()
 
-public:
-	virtual void Execute_Implementation(AActor* TriggerActor, AActor* OtherActor) override;
-
-	UPROPERTY(EditAnywhere, Instanced, BlueprintReadWrite, Category = "Command")
+private:
+	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Command|Composite", meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UCommand>> Commands;
+
+protected:
+	virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
+	{
+		for (UCommand *Command : Commands)
+		{
+			if (Command)
+			{
+				Command->Execute(OwnerActor, InstigatorActor);
+			}
+		}
+		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
+	}
 };
