@@ -21,6 +21,9 @@ class COMMANDCORE_API UCommand_PlayMontage : public UCommand
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
+	FName SkeletalMeshComponentTag = NAME_None;
+	
 	/** Which actor's SkeletalMeshComponent this command should play the montage on. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
 	ECommandTargetActor TargetActor = ECommandTargetActor::InstigatorActor;
@@ -50,7 +53,30 @@ private:
 	USkeletalMeshComponent *ResolveSkeletalMeshComponent(AActor *OwnerActor, AActor *InstigatorActor) const
 	{
 		AActor *Target = ResolveTargetActor(OwnerActor, InstigatorActor, TargetActor);
-		return Target ? Target->FindComponentByClass<USkeletalMeshComponent>() : nullptr;
+		if (!Target)
+		{
+			LOG_ERROR("ResolveSkeletalMesh Failed!");
+			return nullptr;
+		}
+
+		if (SkeletalMeshComponentTag == NAME_None)
+		{
+			return Target->FindComponentByClass<USkeletalMeshComponent>();
+		}
+
+		TArray<USkeletalMeshComponent *> SkeletalMeshComponents;
+		Target->GetComponents<USkeletalMeshComponent>(SkeletalMeshComponents);
+
+		for (USkeletalMeshComponent *Comp : SkeletalMeshComponents)
+		{
+			if (Comp && Comp->ComponentHasTag(SkeletalMeshComponentTag))
+			{
+				return Comp;
+			}
+		}
+
+		LOG_WARNING("Can't find any SkeletalMeshComponent.");
+		return nullptr;
 	}
 
 protected:

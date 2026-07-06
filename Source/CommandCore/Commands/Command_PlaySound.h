@@ -42,7 +42,7 @@ protected:
 	ECommandTargetActor LocationSource = ECommandTargetActor::OwnerActor;
 
 	/** Custom world-space location, editable via the 3D gizmo in the level viewport. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ESoundLocationSource::CustomLocation", EditConditionHides, MakeEditWidget = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ECommandTargetActor::OtherActor", EditConditionHides, MakeEditWidget = "true"))
 	TObjectPtr<AActor> CustomLocation;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (ClampMin = "0.0"))
