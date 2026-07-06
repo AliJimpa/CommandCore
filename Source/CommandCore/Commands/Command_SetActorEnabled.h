@@ -118,10 +118,10 @@ protected:
 				Actor->SetActorTickEnabled(bSetActorEnabled);
 			}
 
-			LOG("Applied state to %d actor.", *Actor->GetName());
+			LOG("Applied state to %s actor.", *Actor->GetName());
 		}
 
-		Print(FString::Printf(TEXT("Applied enabled-state overrides to %d actor(s)."), Targets.Num()), false);
+		LOG("Applied enabled-state overrides to %d actor(s).", Targets.Num());
 
 		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}

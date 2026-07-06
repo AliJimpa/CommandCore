@@ -32,8 +32,8 @@ protected:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Interp", meta = (InlineEditConditionToggle, AllowPrivateAccess = "true"))
     bool bOverrideBehaviourType = false;
-    UPROPERTY(EditAnywhere, Category = "Command|Interp", meta = (EditCondition = "bOverrideBehaviourType", AllowPrivateAccess = "true"))
-    TEnumAsByte<EInterpToBehaviourType> BehaviourType = EInterpToBehaviourType::OneShot;
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Interp", meta = (EditCondition = "bOverrideBehaviourType", AllowPrivateAccess = "true"))
+    EInterpToBehaviourType BehaviourType = EInterpToBehaviourType::OneShot;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, BlueprintReadOnly, Category = "Command|Movement", meta = (InlineEditConditionToggle, AllowPrivateAccess = "true"))
     bool bOverrideSpeedMultiplier = false;
