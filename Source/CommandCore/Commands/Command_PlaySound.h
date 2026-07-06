@@ -109,7 +109,12 @@ private:
 	}
 
 protected:
-	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const override;
+	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const override
+	{
+		if (Sound == nullptr)
+			return false;
+		return Super::K2_CanExecute_Implementation(OwnerActor, InstigatorActor);
+	}
 	virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
 	{
 		if (PlayMode == ESoundPlayMode::Sound2D)
