@@ -4,6 +4,14 @@
 #include "UObject/NoExportTypes.h"
 #include "Command.generated.h"
 
+UENUM()
+enum class ECommandTargetActor : uint8
+{
+	OwnerActor UMETA(DisplayName = "Owner Actor"),
+	InstigatorActor UMETA(DisplayName = "Instigator Actor"),
+	OtherActor UMETA(DisplayName = "Other Actor")
+};
+
 /**
  * Abstract base "Command" object for the Trigger Command System.
  *
@@ -47,6 +55,8 @@ private:
 	bool bPrintLog = false;
 
 protected:
+	UFUNCTION(BlueprintCallable, Category = "Command", meta = (ToolTip = "Retrun Target Actor Based On SelectedMode", AllowPrivateAccess = "true"))
+	AActor *ResolveTargetActor(AActor *OwnerActor, AActor *InstigatorActor, const ECommandTargetActor &Mode) const;
 	UFUNCTION(BlueprintCallable, Category = "Command", meta = (ToolTip = "This function will add a debug message to the onscreen message list.", AllowPrivateAccess = "true"))
 	void Print(const FString &Message, bool IsError);
 
@@ -61,4 +71,7 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "On Construction"))
 	void K2_OnConstruction(AActor *OwnerActor);
 	virtual void K2_OnConstruction_Implementation(AActor *OwnerActor);
+	UFUNCTION(BlueprintNativeEvent, Category = "Command", meta = (DisplayName = "GetOtherActor"))
+	void K2_GetOtherActor();
+	virtual AActor *K2_GetOtherActor_Implementation() { return nullptr; }
 };

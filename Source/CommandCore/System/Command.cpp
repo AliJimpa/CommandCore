@@ -8,7 +8,6 @@ void UCommand::Construction(AActor *OwnerActor)
 
 void UCommand::K2_OnConstruction_Implementation(AActor *OwnerActor)
 {
-	
 }
 
 void UCommand::Execute(AActor *OwnerActor, AActor *InstigatorActor)
@@ -33,6 +32,22 @@ void UCommand::K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorA
 bool UCommand::K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const
 {
 	return OwnerActor != nullptr && InstigatorActor != nullptr;
+}
+
+AActor *UCommand::ResolveTargetActor(AActor *OwnerActor, AActor *InstigatorActor, const ECommandTargetActor &Mode) const
+{
+	switch (TargetActor)
+	{
+	case ECommandTargetActor::OwnerActor:
+		return OwnerActor;
+	case ECommandTargetActor::InstigatorActor:
+		return InstigatorActor;
+	case ECommandTargetActor::OtherActor:
+		return K2_GetOtherActor();
+	default:
+		LOG_WARNING("Unhandle");
+		return nullptr;
+	}
 }
 
 void UCommand::Print(const FString &Message, bool IsError)
