@@ -26,7 +26,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	bool bPrintToLog = true;
 
-public:
+protected:
 	virtual bool K2_CanExecute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) const override
 	{
 		return OwnerActor != nullptr;
@@ -44,5 +44,7 @@ public:
 		{
 			UE_LOG(LogTemp, Log, TEXT("[Command] %s"), *Full);
 		}
+
+		Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
 	}
 };

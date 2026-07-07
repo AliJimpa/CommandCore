@@ -37,6 +37,9 @@ private:
 	void RunCommands(const TArray<TObjectPtr<UCommand>> &Commands, AActor *OtherActor);
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Trigger")
+	bool bActiveTrigger = true;
+
 	/** Commands run, in order, when something begins overlapping the volume. */
 	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Trigger")
 	TArray<TObjectPtr<UCommand>> OnBeginOverlapCommands;
@@ -67,6 +70,11 @@ protected:
 	bool bHasTriggered = false;
 
 public:
+	UFUNCTION(BlueprintCallable, Category = "Trigger")
+	void SetActive(bool active)
+	{
+		bActiveTrigger = active;
+	}
 	UFUNCTION(BlueprintCallable, Category = "Trigger")
 	void ResetTrigger()
 	{
