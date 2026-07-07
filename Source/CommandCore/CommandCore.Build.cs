@@ -29,6 +29,9 @@ public class CommandCore : ModuleRules
 			new string[]
 			{
 				"Core",
+				"LevelSequence",
+				"MovieScene",
+				"MovieSceneTracks"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
