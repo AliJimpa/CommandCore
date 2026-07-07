@@ -32,7 +32,8 @@ public class CommandCore : ModuleRules
 				"LevelSequence",
 				"MovieScene",
 				"MovieSceneTracks",
-				"UMG"
+				"UMG",
+				"Niagara"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

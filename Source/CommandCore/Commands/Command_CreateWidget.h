@@ -6,8 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/CommandDebug.h"
 #include "Command_CreateWidget.generated.h"
-
 
 /**
  * Creates a Widget of the given class and adds it to the player's viewport.
@@ -100,7 +100,7 @@ protected:
             OwningPlayer->SetShowMouseCursor(true);
         }
 
-        Print(FString::Printf(TEXT("Created widget %s and added to viewport."), *WidgetClass->GetName()), false);
+        LOG("Created widget %s and added to viewport.", *WidgetClass->GetName());
 
         Super::K2_Execute_Implementation(OwnerActor, InstigatorActor);
     }
