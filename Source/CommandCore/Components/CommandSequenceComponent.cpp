@@ -80,7 +80,7 @@ void UCommandSequenceComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 }
 
 #if WITH_EDITOR
-void UCommandSequenceComponent::TestExecute()
+void UCommandSequenceComponent::Construction()
 {
 	if (AActor* OwnerActor = GetOwner())
 	{
