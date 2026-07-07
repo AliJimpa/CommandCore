@@ -33,7 +33,9 @@ public class CommandCore : ModuleRules
 				"MovieScene",
 				"MovieSceneTracks",
 				"UMG",
-				"Niagara"
+				"Niagara",
+				"AIModule",
+				"GameplayTasks"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
