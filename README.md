@@ -68,6 +68,7 @@ Defaults to requiring the `"Player"` tag out of the box.
 | `UCommand_RotatingMovementControl` | Controls a `URotatingMovementComponent` — Rotation Rate, Pivot Translation, local/world space. |
 | `UCommand_SetCharacterMovementProperties` | Sets `UCharacterMovementComponent` properties (Movement Mode, speeds, jump, air control, crouch) if the target is a Character. |
 | `UCommand_DestroyActor` / `UCommand_DestroyActors` | Destroys a single resolved actor, or a list of actors from the scene. |
+| `UCommand_SetActiveTrigger` | Toggles Activation  on a list of 'ACommandTriggerBox', individually. |
 | `UCommand_SetActorEnabled` | Toggles Visibility, Collision, and Tick on a list of actors, individually or via a master enable/disable switch. |
 | `UCommand_SetCollisionProperties` | Sets collision enabled state, profile, overlap events, physics simulation, and hit notifications across a list of actors. |
 | `UCommand_SetPhysicsProperties` | Sets simulate physics, gravity, mass, damping, velocity, and rotation locks across a list of actors. |
