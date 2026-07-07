@@ -21,32 +21,32 @@ class COMMANDCORE_API UCommand_PlayMontage : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
-	FName SkeletalMeshComponentTag = NAME_None;
-	
 	/** Which actor's SkeletalMeshComponent this command should play the montage on. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	ECommandTargetActor TargetActor = ECommandTargetActor::InstigatorActor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides, AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides, AllowPrivateAccess = "true"))
 	TObjectPtr<AActor> OtherActor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	TObjectPtr<UAnimMontage> Montage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage", meta = (ClampMin = "0.01"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
+	FName SkeletalMeshComponentTag = NAME_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting", meta = (ClampMin = "0.01"))
 	float PlayRate = 1.0f;
 
 	/** If set, starts the montage from this section instead of the beginning. Leave "None" to play from the start. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	FName StartSectionName = NAME_None;
 
 	/** If true, stops any currently playing montage on this AnimInstance before playing this one. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	bool bStopAllMontagesFirst = true;
 
 	/** Blend-out time used when stopping a previous montage (only relevant if bStopAllMontagesFirst is true). */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Montage", meta = (EditCondition = "bStopAllMontagesFirst", ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting", meta = (EditCondition = "bStopAllMontagesFirst", ClampMin = "0.0"))
 	float StopBlendOutTime = 0.25f;
 
 private:

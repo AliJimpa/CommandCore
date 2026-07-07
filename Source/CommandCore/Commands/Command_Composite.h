@@ -11,7 +11,7 @@ class COMMANDCORE_API UCommand_Composite : public UCommand
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Command|Composite", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Command", meta = (AllowPrivateAccess = "true"))
 	TArray<TObjectPtr<UCommand>> Commands;
 
 protected:

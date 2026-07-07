@@ -17,9 +17,9 @@ class COMMANDCORE_API UCommand_Delay : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Delay", meta = (ClampMin = "0.0", AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (ClampMin = "0.0", AllowPrivateAccess = "true"))
 	float DelaySeconds = 1.f;
-	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Command|Delay", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, Instanced, BlueprintReadOnly, Category = "Command", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCommand> InnerCommand;
 
 protected:

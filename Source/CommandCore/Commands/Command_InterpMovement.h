@@ -35,13 +35,13 @@ protected:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Interp", meta = (EditCondition = "bOverrideBehaviourType", AllowPrivateAccess = "true"))
     EInterpToBehaviourType BehaviourType = EInterpToBehaviourType::OneShot;
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, BlueprintReadOnly, Category = "Command|Movement", meta = (InlineEditConditionToggle, AllowPrivateAccess = "true"))
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, BlueprintReadOnly, Category = "Command|Interp", meta = (InlineEditConditionToggle, AllowPrivateAccess = "true"))
     bool bOverrideSpeedMultiplier = false;
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, BlueprintReadOnly, Category = "Command|Movement", meta = (EditCondition = "bOverrideSpeedMultiplier", AllowPrivateAccess = "true"))
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, BlueprintReadOnly, Category = "Command|Interp", meta = (EditCondition = "bOverrideSpeedMultiplier", AllowPrivateAccess = "true"))
     float SpeedMultiplier = 600.0f;
 
     /** If true, restarts movement from the first ControlPoint after applying overrides. */
-    UPROPERTY(EditAnywhere, Category = "Interp Movement")
+    UPROPERTY(EditAnywhere, Category = "Command|Interp")
     bool bRestartOnExecute = false;
 
 protected:

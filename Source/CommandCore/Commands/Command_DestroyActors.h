@@ -12,15 +12,15 @@ class COMMANDCORE_API UCommand_DestroyActors : public UCommand
 
 protected:
     /** Actors placed in the level to destroy. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command")
     TArray<TSoftObjectPtr<AActor>> TargetActors;
 
     /** If true, OwnerActor is also destroyed. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
     bool bIncludeOwnerActor = false;
 
     /** If true, InstigatorActor is also destroyed. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
     bool bIncludeInstigatorActor = false;
 
 private:

@@ -12,17 +12,17 @@ class COMMANDCORE_API UCommand_SetActorEnabled : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Activation")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	bool bSetActorEnabled = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Activation")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	TArray<TSoftObjectPtr<AActor>> TargetActors;
 
 	/** If true, OwnerActor is also included as a target. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Activation")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
 	bool bIncludeOwnerActor = false;
 	/** If true, InstigatorActor is also included as a target. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Activation")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
 	bool bIncludeInstigatorActor = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Override", meta = (InlineEditConditionToggle))

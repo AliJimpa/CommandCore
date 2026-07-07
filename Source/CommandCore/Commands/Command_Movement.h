@@ -22,15 +22,15 @@ class COMMANDCORE_API UCommand_Movement : public UCommand
 
 private:
     /** Which actor's MovementComponent this command should affect. */
-    UPROPERTY(EditAnywhere, Category = "Command|Movement")
+    UPROPERTY(EditAnywhere, Category = "Command")
     ECommandTargetActor TargetActor = ECommandTargetActor::OwnerActor;
 
 protected:
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Movement", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides, AllowPrivateAccess = "true"))
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides, AllowPrivateAccess = "true"))
     TObjectPtr<AActor> OtherActor;
 
     /** True = Pause movement (deactivate + stop). False = Play/Resume movement. */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Movement")
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
     bool bPauseMovement = false;
 
 protected:

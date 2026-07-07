@@ -11,19 +11,19 @@ class COMMANDCORE_API UCommand_Print : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Print")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	FString Message = TEXT("Trigger fired!");
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Print")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	FLinearColor TextColor = FLinearColor::Green;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Print")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	float Duration = 3.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Print")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	bool bPrintToScreen = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Print")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	bool bPrintToLog = true;
 
 public:

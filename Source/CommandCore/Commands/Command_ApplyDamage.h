@@ -14,9 +14,9 @@ class COMMANDCORE_API UCommand_ApplyDamage : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Damage", meta = (ClampMin = "0.0", AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (ClampMin = "0.0", AllowPrivateAccess = "true"))
 	float DamageAmount = 10.f;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Damage", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UDamageType> DamageType;
 
 protected:

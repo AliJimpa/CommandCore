@@ -34,34 +34,34 @@ protected:
 	TObjectPtr<USoundBase> Sound;
 
 	/** Stage 1: 2D sound or 3D sound at a location. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	ESoundPlayMode PlayMode = ESoundPlayMode::Sound2D;
 
 	/** Stage 2 (only for AtLocation): where the 3D location comes from. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation", EditConditionHides))
 	ECommandTargetActor LocationSource = ECommandTargetActor::OwnerActor;
 
 	/** Custom world-space location, editable via the 3D gizmo in the level viewport. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ECommandTargetActor::OtherActor", EditConditionHides, MakeEditWidget = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command", meta = (EditCondition = "PlayMode == ESoundPlayMode::AtLocation && LocationSource == ECommandTargetActor::OtherActor", EditConditionHides, MakeEditWidget = "true"))
 	TObjectPtr<AActor> CustomLocation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting", meta = (ClampMin = "0.0"))
 	float VolumeMultiplier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Sound", meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting", meta = (ClampMin = "0.0"))
 	float PitchMultiplier = 1.f;
 
 	/** If true, spawns a UAudioComponent instead of a fire-and-forget PlaySound call. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Spawn")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting")
 	bool bUseAudioComponent = false;
 
 	/** Only for AtLocation + AudioComponent: attaches the spawned component to the source actor instead of a static world location. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Spawn",
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Setting",
 			  meta = (EditCondition = "bUseAudioComponent && PlayMode == ESoundPlayMode::AtLocation && LocationSource != ESoundLocationSource::CustomLocation", EditConditionHides))
 	bool bAttachToActor = false;
 
 	/** Cached handle when bUseAudioComponent is true - useful if a subclass or later command needs to stop/fade it. */
-	UPROPERTY(Transient, BlueprintReadOnly, Category = "Command|Spawn")
+	UPROPERTY(Transient, BlueprintReadOnly, Category = "Command|Setting")
 	TObjectPtr<UAudioComponent> SpawnedAudioComponent;
 
 private:

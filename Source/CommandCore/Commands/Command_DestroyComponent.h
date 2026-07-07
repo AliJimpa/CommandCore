@@ -19,15 +19,15 @@ class COMMANDCORE_API UCommand_DestroyComponent : public UCommand
 
 protected:
     /** Which actor to search for the component on. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command")
     ECommandTargetActor TargetActor = ECommandTargetActor::InstigatorActor;
 
     /** Only used when TargetActor is "Other Actor". */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command", meta = (EditCondition = "TargetActor == ECommandTargetActor::OtherActor", EditConditionHides))
     TSoftObjectPtr<AActor> OtherActor;
 
     /** Component class to search for. */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command")
     TSubclassOf<UActorComponent> ComponentClass;
 
     /**
@@ -35,7 +35,7 @@ protected:
      * Only needed if the target actor has more than one component of this type;
      * ignored (and unnecessary) if there's only one match.
      */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Destroy")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command")
     FName ComponentTag = NAME_None;
 
 private:

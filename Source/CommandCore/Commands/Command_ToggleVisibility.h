@@ -11,9 +11,9 @@ class COMMANDCORE_API UCommand_ToggleVisibility : public UCommand
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Visiblity")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	TArray<TSoftObjectPtr<AActor>> TargetActors;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command|Visiblity")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	bool bAlsoToggleCollision = true;
 
 protected:
