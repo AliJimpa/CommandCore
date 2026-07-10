@@ -11,10 +11,13 @@ UCommandSequenceComponent::UCommandSequenceComponent()
 void UCommandSequenceComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	SetComponentTickEnabled(false);
+	if (!bAutoExecuteOnBeginPlay)
+	{
+		SetComponentTickEnabled(false);
+	}
 }
 
-void UCommandSequenceComponent::ExecuteCommands(AActor* InstigatorActor)
+void UCommandSequenceComponent::ExecuteCommands(AActor *InstigatorActor)
 {
 	if (bIsRunning && !bRestartIfAlreadyRunning)
 	{
@@ -27,10 +30,8 @@ void UCommandSequenceComponent::ExecuteCommands(AActor* InstigatorActor)
 	}
 
 	// Sort by Timeline ascending so we can walk through them in order.
-	Algo::Sort(Commands, [](const FCommandTrack& A, const FCommandTrack& B)
-	{
-		return A.Timeline < B.Timeline;
-	});
+	Algo::Sort(Commands, [](const FCommandTrack &A, const FCommandTrack &B)
+			   { return A.Timeline < B.Timeline; });
 
 	CachedInstigatorActor = InstigatorActor;
 	NextCommandIndex = 0;
@@ -48,7 +49,7 @@ void UCommandSequenceComponent::StopSequence()
 	SetComponentTickEnabled(false);
 }
 
-void UCommandSequenceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UCommandSequenceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
@@ -59,11 +60,11 @@ void UCommandSequenceComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 
 	ElapsedTime += DeltaTime;
 
-	AActor* OwnerActor = GetOwner();
+	AActor *OwnerActor = GetOwner();
 
 	while (NextCommandIndex < Commands.Num() && Commands[NextCommandIndex].Timeline <= ElapsedTime)
 	{
-		if (UCommand* Command = Commands[NextCommandIndex].Command)
+		if (UCommand *Command = Commands[NextCommandIndex].Command)
 		{
 			Command->Execute(OwnerActor, CachedInstigatorActor);
 		}
@@ -82,7 +83,7 @@ void UCommandSequenceComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 #if WITH_EDITOR
 void UCommandSequenceComponent::Construction()
 {
-	if (AActor* OwnerActor = GetOwner())
+	if (AActor *OwnerActor = GetOwner())
 	{
 		ExecuteCommands(OwnerActor);
 	}

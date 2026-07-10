@@ -14,9 +14,27 @@ class COMMANDCORE_API UCommandComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+protected:
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
 public:
-	UPROPERTY(BlueprintAssignable, Category = "Events")
+	UPROPERTY(BlueprintAssignable, AdvancedDisplay, Category = "Events")
 	FOnCommandsExecuted OnCommandsExecuted;
+
+protected:
+	/**
+	 * If true, ExecuteCommands() will be called automatically when the game starts,
+	 * using the owning actor as both OwnerActor and InstigatorActor.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
+	bool bAutoExecuteOnBeginPlay = false;
+	/**
+	 * If true, ExecuteCommands() will be called automatically when the component/actor
+	 * ends play, using the owning actor as both OwnerActor and InstigatorActor.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
+	bool bAutoExecuteOnEndPlay = false;
 
 public:
 	/**
@@ -33,7 +51,7 @@ public:
 
 private:
 #if WITH_EDITOR
-	UFUNCTION(CallInEditor, Category = "Editor", meta = (DisplayName = "Construction"))
+	UFUNCTION(CallInEditor, Category = "Command", meta = (DisplayName = "Construction"))
 	virtual void Construction() {}
 #endif
 };

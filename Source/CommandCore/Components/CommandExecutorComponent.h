@@ -23,7 +23,7 @@ public:
 
 protected:
     /** Ordered list of commands to run when ExecuteCommands() is called. */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Instanced, Category = "CommandExecuter")
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Instanced, Category = "Command")
     TArray<TObjectPtr<UCommand>> Commands;
 
 protected:

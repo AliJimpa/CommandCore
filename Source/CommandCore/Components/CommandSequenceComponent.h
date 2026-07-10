@@ -50,16 +50,16 @@ protected:
 #endif
 
 public:
-	UPROPERTY(BlueprintAssignable, Category = "Events")
+	UPROPERTY(BlueprintAssignable,AdvancedDisplay, Category = "Events")
 	FOnCommandSequenceFinished OnCommandSequenceFinished;
 
 protected:
 	/** Commands to run, each at its own Timeline offset. Sorted by Timeline automatically when the sequence starts. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CommandSequencer")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Command")
 	TArray<FCommandTrack> Commands;
 
 	/** If true, restarting the sequence while it's already running cancels the current run and starts over. If false, a call while already running is ignored. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CommandSequencer")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Command|Setting")
 	bool bRestartIfAlreadyRunning = true;
 
 private:

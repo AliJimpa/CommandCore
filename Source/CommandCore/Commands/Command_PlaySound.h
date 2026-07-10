@@ -75,7 +75,14 @@ protected:
 	{
 		if (Sound == nullptr)
 			return false;
-		return Super::K2_CanExecute_Implementation(OwnerActor, InstigatorActor);
+		if (PlayMode == ESoundPlayMode::AtLocation)
+		{
+			return Super::K2_CanExecute_Implementation(OwnerActor, InstigatorActor);
+		}
+		else
+		{
+			return OwnerActor != nullptr;
+		}
 	}
 	virtual void K2_Execute_Implementation(AActor *OwnerActor, AActor *InstigatorActor) override
 	{
