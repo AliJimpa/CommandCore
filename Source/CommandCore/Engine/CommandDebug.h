@@ -7,13 +7,13 @@ DECLARE_LOG_CATEGORY_EXTERN(Log_CommandCore, Log, All);
 #if !UE_BUILD_SHIPPING
 
 #define LOG(Format, ...) \
-    UE_LOG(Log_CommandCore, Log, TEXT(Format), ##__VA_ARGS__)
+    do { UE_LOG(Log_CommandCore, Log, TEXT(Format), ##__VA_ARGS__); } while (0)
 
 #define LOG_WARNING(Format, ...) \
-    UE_LOG(Log_CommandCore, Warning, TEXT(Format), ##__VA_ARGS__)
+    do { UE_LOG(Log_CommandCore, Warning, TEXT(Format), ##__VA_ARGS__); } while (0)
 
 #define LOG_ERROR(Format, ...) \
-    UE_LOG(Log_CommandCore, Error, TEXT(Format), ##__VA_ARGS__)
+    do { UE_LOG(Log_CommandCore, Error, TEXT(Format), ##__VA_ARGS__); } while (0)
 
 #define PRINT(Format, ...)                                     \
     do                                                         \
@@ -28,9 +28,9 @@ DECLARE_LOG_CATEGORY_EXTERN(Log_CommandCore, Log, All);
 
 #else
 
-#define LOG(...)
-#define LOG_WARNING(...)
-#define LOG_ERROR(...)
-#define PRINT(...)
+#define LOG(...)           do {} while (0)
+#define LOG_WARNING(...)   do {} while (0)
+#define LOG_ERROR(...)     do {} while (0)
+#define PRINT(...)         do {} while (0)
 
 #endif
